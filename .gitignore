@@ -129,7 +129,15 @@ env.bak/
 venv.bak/
 
 # data
-
+.data
+.dataset
+.datasets
+data/
+dataset/
+datasets/
+DATA/
+DATASET/
+DATASETS/
 
 # Spyder project settings
 .spyderproject
