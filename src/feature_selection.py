@@ -41,6 +41,6 @@ def fast_fill(dataframe: pd.DataFrame):
 
 def get_corr_columns(dataframe: pd.DataFrame, column: str, x: bool=False):
     correlations = dataframe.corr()[column].abs().sort_values(ascending=x)
-    correlated_columns = correlations.index[1:21].tolist()
+    correlated_columns = correlations.index[1:25].tolist()
     
     return correlated_columns
