@@ -5,7 +5,9 @@ def equalize_class_imbalance(df, target_column):
     df_1 = df[df[target_column] == 1]
     df_0 = df[df[target_column] == 0]
     
-    df_0_resampled = resample(df_0, replace=False, n_samples=(15000), random_state=42)
+    per=len(df_1)*1.4
+    
+    df_0_resampled = resample(df_0, replace=False, n_samples=(per), random_state=42)
     
     df_equalized = pd.concat([df_1, df_0_resampled])
     
