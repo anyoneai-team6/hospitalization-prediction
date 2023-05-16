@@ -1,62 +1,46 @@
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 
-def correlation_filter(df, y_column, threshold=0.5):
-    correlation_matrix = df.corr()
+def get_bin_columns(dataframe: pd.DataFrame):
+    binary_columns = []
+    non_binary_columns = []
     
-    correlation_with_target = correlation_matrix[y_column].abs()
-    
-    selected_features = correlation_with_target[correlation_with_target > threshold]
-    
-    return selected_features
-
-
-def backward_elimination(X, y, significance_level=0.05):
-    num_features = X.shape[1]
-    for i in range(num_features):
-        regressor = sm.OLS(y, X).fit()
-        max_pvalue = max(regressor.pvalues)
-        if max_pvalue > significance_level:
-            max_pvalue_index = np.argmax(regressor.pvalues)
-            X = np.delete(X, max_pvalue_index, 1)
+    for column in dataframe.columns:
+        unique_values = dataframe[column].unique()
+        if len(unique_values) == 2 and set(unique_values) <= set([0, 1]):
+            binary_columns.append(column)
         else:
-            break
-    return X
-
-
-
-def forward_selection(X, y, significance_level=0.05):
-    num_features = X.shape[1]
-    selected_features = []
-    best_error = float('inf')
+            non_binary_columns.append(column)
     
-    for i in range(num_features):
-        remaining_features = list(set(range(X.shape[1])) - set(selected_features))
-        best_feature = None
-        best_model = None
-        
-        for feature in remaining_features:
-            model = LinearRegression()
-            model.fit(X[:, selected_features + [feature]], y)
-            y_pred = model.predict(X[:, selected_features + [feature]])
-            error = mean_squared_error(y, y_pred)
-            
-            if error < best_error:
-                best_error = error
-                best_feature = feature
-                best_model = model
-                
-        if best_feature is not None:
-            selected_features.append(best_feature)
-        else:
-            break
-        
-        if best_model is not None:
-            model = best_model
-        else:
-            model = LinearRegression()
-            model.fit(X[:, selected_features], y)
-            
-    return X[:, selected_features]
+    return binary_columns, non_binary_columns
+
+
+def fill_with_mode(dataframe: pd.DataFrame, columns: list):
+    for column in columns:
+        most_frequent_value = dataframe[column].mode()[0]
+        dataframe[column].fillna(most_frequent_value, inplace=True)
+    
+    return dataframe
+
+
+def fill_with_mean(dataframe: pd.DataFrame, columns: list):
+    for column in columns:
+        mean = dataframe[column].mean()
+        dataframe[column].fillna(mean, inplace=True)
+    
+    return dataframe
+
+
+def fast_fill(dataframe: pd.DataFrame):
+    binary_cols, non_binary_cols = get_bin_columns(dataframe)
+    dataframe = fill_with_mode(dataframe, binary_cols)
+    dataframe = fill_with_mean(dataframe, non_binary_cols)
+    
+    return dataframe
+
+
+def get_corr_columns(dataframe: pd.DataFrame, column: str, x: bool=False):
+    correlations = dataframe.corr()[column].abs().sort_values(ascending=x)
+    correlated_columns = correlations.index[1:21].tolist()
+    
+    return correlated_columns
