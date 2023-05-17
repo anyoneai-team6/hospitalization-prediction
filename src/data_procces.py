@@ -9,28 +9,8 @@ from sklearn.model_selection import train_test_split
 
 
 def split_data(X, y, test_size=0.2, random_state=42):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
     return X_train, X_test, y_train, y_test
-
-
-def equalize_class_imbalance(df, target_column):
-    df_1 = df[df[target_column] == 1]
-    df_0 = df[df[target_column] == 0]
-    
-    per=int(len(df_1)*1.4)
-    
-    df_0_resampled = resample(df_0, replace=False, n_samples=(per), random_state=42)
-    
-    df_equalized = pd.concat([df_1, df_0_resampled])
-    
-    df_equalized = df_equalized.sample(frac=1, random_state=42).reset_index(drop=True)
-    
-    print(df_equalized[target_column].value_counts())
-    
-    y = df_equalized[target_column]
-    x = df_equalized.drop(target_column, axis=1)
-    
-    return x, y
 
 
 def apply_smote(X_train, y_train):
@@ -84,8 +64,23 @@ def apply_standard_scaler(X_train, X_test):
     X_test_scaled = scaler.transform(X_test)
     return X_train_scaled, X_test_scaled
 
+
 def apply_power_transform(X_train, X_test):
     transformer = PowerTransformer(method='yeo-johnson')
     X_train_transformed = transformer.fit_transform(X_train)
     X_test_transformed = transformer.transform(X_test)
     return X_train_transformed, X_test_transformed
+
+
+def clean_categoricals(df):
+    # This function cleans categorical columns containing 0,1 and nans, transforming them to F, T and NC
+    # and then retunrs ONLY the columns cleaned
+    selected_columns = []
+    for column in df.columns:
+        unique_values = df[column].dropna().unique()
+        if set(unique_values) <= {0, 1, np.nan}:
+            selected_columns.append(column)
+    
+    cleaned_cats = df[selected_columns].replace({0: "F", 1: "T", np.nan: "NC"})
+    
+    return cleaned_cats
