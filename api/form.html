@@ -19,37 +19,97 @@
     <div class="container mt-5">
       <form action="/predict" method="POST">
         <!-- Add form fields here -->
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
+        <div class="mb-3" id="user-name">
+          <label for="nameInput" class="form-label">Nombre:</label>
           <input
-            type="email"
+            type="text"
             class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            id="nameInput"
+            aria-describedby="userName"
           />
-          <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
+          <label for="surnameInput" class="form-label pt-2">Apellidos:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="surnameInput"
+            aria-describedby="userSurname"
+          />
+        </div>
+        <div class="mb-3" id="do-you-have-this">
+          <p>Do you have this?:</p>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DoYouHaveThis"
+              id="inlineRadio1"
+              value="option1"
+            />
+            <label class="form-check-label" for="inlineRadio1">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DoYouHaveThis"
+              id="inlineRadio2"
+              value="option2"
+            />
+            <label class="form-check-label" for="inlineRadio2">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DoYouHaveThis"
+              id="inlineRadio3"
+              value="option3"
+            />
+            <label class="form-check-label" for="inlineRadio3"
+              >I don't know</label
+            >
           </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-          />
+        <div class="mb-3" id="do-you-have-that">
+          <p>Do you have that?:</p>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DoYouHaveThat"
+              id="inlineRadio1"
+              value="option1"
+            />
+            <label class="form-check-label" for="inlineRadio1">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DoYouHaveThat"
+              id="inlineRadio2"
+              value="option2"
+            />
+            <label class="form-check-label" for="inlineRadio2">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DoYouHaveThat"
+              id="inlineRadio3"
+              value="option3"
+            />
+            <label class="form-check-label" for="inlineRadio3"
+              >I don't know</label
+            >
+          </div>
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-          <label class="form-check-label" for="exampleCheck1"
-            >Check me out</label
-          >
+        <div class="mb-3" id="submit-form">
+          <button type="submit" class="btn btn-primary" value="Predict">
+            Submit
+          </button>
         </div>
-        <button type="submit" class="btn btn-primary" value="Predict">
-          Submit
-        </button>
         <!-- <input type="submit" value="Predict" /> -->
       </form>
     </div>
