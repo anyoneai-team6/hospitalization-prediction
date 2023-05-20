@@ -1,3 +1,4 @@
+import json
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -6,6 +7,13 @@ app = Flask(__name__)
 def predict():
     # Retrieve form data
     form_data = request.form
+
+    # Store form data in a JSON file
+    with open('data.json', 'w') as json_file:
+        json.dump(form_data, json_file)
+
+    # Placeholder prediction
+    prediction_result = 'Some prediction result'
 
     # Perform prediction with ML model using form_data
 
