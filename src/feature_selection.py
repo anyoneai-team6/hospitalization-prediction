@@ -23,6 +23,16 @@ def fill_with_mode(dataframe: pd.DataFrame, columns: list):
     return dataframe
 
 
+def fill_with_encoding(dataframe: pd.DataFrame, columns: list) -> pd.DataFrame:
+    # Reemplazar los 0 por -1
+    dataframe.replace(0, -1, inplace=True)
+    
+    # Reemplazar los NaN por 0
+    dataframe.fillna(0, inplace=True)
+    
+    return dataframe
+
+
 def fill_with_mean(dataframe: pd.DataFrame, columns: list):
     for column in columns:
         mean = dataframe[column].mean()
@@ -34,6 +44,14 @@ def fill_with_mean(dataframe: pd.DataFrame, columns: list):
 def fast_fill(dataframe: pd.DataFrame):
     binary_cols, non_binary_cols = get_bin_columns(dataframe)
     dataframe = fill_with_mode(dataframe, binary_cols)
+    dataframe = fill_with_mean(dataframe, non_binary_cols)
+    
+    return dataframe
+
+
+def fast_fill_2(dataframe: pd.DataFrame):
+    binary_cols, non_binary_cols = get_bin_columns(dataframe)
+    dataframe = fill_with_encoding(dataframe, binary_cols)
     dataframe = fill_with_mean(dataframe, non_binary_cols)
     
     return dataframe
