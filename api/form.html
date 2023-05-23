@@ -19,92 +19,25 @@
     <div class="container mt-5">
       <form action="/predict" method="POST">
         <!-- Add form fields here -->
-        <div class="mb-3" id="user-name">
-          <label for="nameInput" class="form-label">Nombre:</label>
+        <div class="mb-3 col-1" id="user-age">
+          <label for="ageInput" class="form-label">Edad:</label>
           <input
-            type="text"
+            type="number"
             class="form-control"
-            name="Nombre"
-            id="nameInput"
-            aria-describedby="userName"
-          />
-          <label for="surnameInput" class="form-label pt-2">Apellidos:</label>
-          <input
-            type="text"
-            class="form-control"
-            name="Apellidos"
-            id="surnameInput"
-            aria-describedby="userSurname"
+            name="Age"
+            id="ageInput"
+            aria-describedby="userAge"
           />
         </div>
-        <div class="mb-3" id="do-you-have-this">
-          <p>Do you have this?:</p>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="DoYouHaveThis"
-              id="inlineRadio1"
-              value="Yes"
-            />
-            <label class="form-check-label" for="inlineRadio1">Yes</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="DoYouHaveThis"
-              id="inlineRadio2"
-              value="No"
-            />
-            <label class="form-check-label" for="inlineRadio2">No</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="DoYouHaveThis"
-              id="inlineRadio3"
-              value="I don't know"
-            />
-            <label class="form-check-label" for="inlineRadio3"
-              >I don't know</label
-            >
-          </div>
-        </div>
-        <div class="mb-3" id="do-you-have-that">
-          <p>Do you have that?:</p>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="DoYouHaveThat"
-              id="inlineRadio1"
-              value="Yes"
-            />
-            <label class="form-check-label" for="inlineRadio1">Yes</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="DoYouHaveThat"
-              id="inlineRadio2"
-              value="No"
-            />
-            <label class="form-check-label" for="inlineRadio2">No</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="DoYouHaveThat"
-              id="inlineRadio3"
-              value="I don't know"
-            />
-            <label class="form-check-label" for="inlineRadio3"
-              >I don't know</label
-            >
+        <div class="row">
+          <div class="mb-3" id="Question1">
+            <p>Question 1:</p>
+            <select class="form-select" name="Question1" id="question1Select">
+              <option value="" disabled selected>Select an option</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Not knows">Not knows</option>
+            </select>
           </div>
         </div>
         <div class="mb-3" id="submit-form">
@@ -112,6 +45,7 @@
             Submit
           </button>
         </div>
+
         <!-- <input type="submit" value="Predict" /> -->
       </form>
     </div>
