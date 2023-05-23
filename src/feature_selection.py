@@ -1,18 +1,22 @@
 import numpy as np
 import pandas as pd
 
-def get_bin_columns(dataframe: pd.DataFrame):
-    binary_columns = []
-    non_binary_columns = []
-    
-    for column in dataframe.columns:
-        unique_values = dataframe[column].unique()
-        if len(unique_values) == 2 and set(unique_values) <= set([0, 1]):
-            binary_columns.append(column)
+
+def get_bin_columns(dataframe):
+    columnas_binarias = []
+    columnas_no_binarias = []
+
+    for columna in dataframe.columns:
+        valores_unicos = np.unique(dataframe[columna])
+        
+        if len(valores_unicos) == 2 and np.array_equal(valores_unicos, [0, 1]):
+            columnas_binarias.append(columna)
         else:
-            non_binary_columns.append(column)
+            columnas_no_binarias.append(columna)
     
-    return binary_columns, non_binary_columns
+    return columnas_binarias, columnas_no_binarias
+
+
 
 
 def fill_with_mode(dataframe: pd.DataFrame, columns: list):
