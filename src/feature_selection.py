@@ -17,24 +17,14 @@ def get_bin_columns(dataframe):
     return columnas_binarias, columnas_no_binarias
 
 
-
-
-def fill_with_mode(dataframe: pd.DataFrame, columns: list):
-    for column in columns:
-        most_frequent_value = dataframe[column].mode()[0]
-        dataframe[column].fillna(most_frequent_value, inplace=True)
-    
-    return dataframe
-
-
 def fill_with_encoding(dataframe: pd.DataFrame, columns: list) -> pd.DataFrame:
     # Reemplazar los 0 por -1
-    dataframe.replace(0, -1, inplace=True)
+    dataframe[columns] = dataframe[columns].replace(0, -1)
     
-    # Reemplazar los NaN por 0
-    dataframe.fillna(0, inplace=True)
+    dataframe[columns] = dataframe[columns].fillna(0, inplace=True)
     
-    return dataframe
+    return dataframe[columns]
+
 
 
 def fill_with_mean(dataframe: pd.DataFrame, columns: list):
@@ -42,21 +32,13 @@ def fill_with_mean(dataframe: pd.DataFrame, columns: list):
         mean = dataframe[column].mean()
         dataframe[column].fillna(mean, inplace=True)
     
-    return dataframe
+    return dataframe[columns]
 
 
 def fast_fill(dataframe: pd.DataFrame):
     binary_cols, non_binary_cols = get_bin_columns(dataframe)
-    dataframe = fill_with_mode(dataframe, binary_cols)
-    dataframe = fill_with_mean(dataframe, non_binary_cols)
-    
-    return dataframe
-
-
-def fast_fill_2(dataframe: pd.DataFrame):
-    binary_cols, non_binary_cols = get_bin_columns(dataframe)
-    dataframe = fill_with_encoding(dataframe, binary_cols)
-    dataframe = fill_with_mean(dataframe, non_binary_cols)
+    dataframe[binary_cols] = fill_with_encoding(dataframe, binary_cols)
+    dataframe[non_binary_cols] = fill_with_mean(dataframe, non_binary_cols)
     
     return dataframe
 
