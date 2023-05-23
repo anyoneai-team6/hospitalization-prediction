@@ -7,9 +7,9 @@ def get_bin_columns(dataframe):
     columnas_no_binarias = []
 
     for columna in dataframe.columns:
-        valores_unicos = np.unique(dataframe[columna])
+        valores_unicos = dataframe[columna].dropna().unique()
         
-        if len(valores_unicos) == 2 and np.array_equal(valores_unicos, [0, 1]):
+        if len(valores_unicos) == 2:
             columnas_binarias.append(columna)
         else:
             columnas_no_binarias.append(columna)
@@ -17,11 +17,12 @@ def get_bin_columns(dataframe):
     return columnas_binarias, columnas_no_binarias
 
 
+
 def fill_with_encoding(dataframe: pd.DataFrame, columns: list) -> pd.DataFrame:
     # Reemplazar los 0 por -1
     dataframe[columns] = dataframe[columns].replace(0, -1)
     
-    dataframe[columns] = dataframe[columns].fillna(0, inplace=True)
+    dataframe[columns] = dataframe[columns].fillna(0)
     
     return dataframe[columns]
 
