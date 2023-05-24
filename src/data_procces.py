@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.utils import resample
-from sklearn.preprocessing import OneHotEncoder,StandardScaler, PowerTransformer
+from sklearn.preprocessing import OneHotEncoder,RobustScaler, PowerTransformer
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer, KNNImputer
 from imblearn.over_sampling import SMOTE
@@ -59,7 +59,7 @@ def preprocess_no_bin(X_train, X_test, strategy="knn"):
 
 
 def apply_standard_scaler(X_train, X_test):
-    scaler = StandardScaler()
+    scaler = RobustScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
     return X_train_scaled, X_test_scaled
