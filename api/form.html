@@ -14,11 +14,20 @@
     />
 
     <title>Hello, world!</title>
+    <style>
+      body {
+        background-image: url("https://www.training.com.au/wp-content/uploads/TR_Healthcare-Medical-Trends_Feature.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        backdrop-filter: blur(10px); /* Apply the blur effect */
+        -webkit-backdrop-filter: blur(10px); /* For Safari */
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-5">
       <form action="/predict" method="POST">
-        <!-- Add form fields here -->
         <div class="mb-3 col-1" id="user-age">
           <label for="ageInput" class="form-label">Edad:</label>
           <input
@@ -30,17 +39,19 @@
           />
         </div>
         <div class="row">
-          <div class="mb-3" id="Question1">
-            <p>Question 1:</p>
-            <select class="form-select" name="Question1" id="question1Select">
-              <option value="" disabled selected>Select an option</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="Not knows">Not knows</option>
-            </select>
+          <div class="pb-3 col-12">
+            <div class="col-3" id="Question1">
+              <label class="pb-1">Question 1:</label>
+              <select class="form-select" name="Question1" id="question1Select">
+                <option value="">--Please choose an option--</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Not knows">Not knows</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div class="mb-3" id="submit-form">
+        <div class="mb-3 mt-3" id="submit-form">
           <button type="submit" class="btn btn-primary" value="Predict">
             Submit
           </button>
