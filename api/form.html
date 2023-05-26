@@ -14,7 +14,7 @@
     />
 
     <title>Hello, world!</title>
-    <style>
+    <style style="height: auto">
       body {
         background-image: url("https://www.training.com.au/wp-content/uploads/TR_Healthcare-Medical-Trends_Feature.png");
         background-repeat: no-repeat;
@@ -26,39 +26,55 @@
     </style>
   </head>
   <body>
-    <div class="container mt-5">
-      <form action="/predict" method="POST">
-        <div class="mb-3 col-1" id="user-age">
-          <label for="ageInput" class="form-label">Edad:</label>
-          <input
-            type="number"
-            class="form-control"
-            name="Age"
-            id="ageInput"
-            aria-describedby="userAge"
-          />
-        </div>
-        <div class="row">
-          <div class="pb-3 col-12">
-            <div class="col-3" id="Question1">
-              <label class="pb-1">Question 1:</label>
-              <select class="form-select" name="Question1" id="question1Select">
-                <option value="">--Please choose an option--</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                <option value="Not knows">Not knows</option>
-              </select>
-            </div>
+    <div class="container-fluid px-5 mt-5">
+      <h2>Predicting Readmissions</h2>
+      <div class="row gx-2">
+        <!-- Columna izquierda -->
+        <div class="col-4">
+          <div class="p-3 border border-3 bg-light">
+            <!-- Formulario -->
+            <form action="/predict" method="POST">
+              <div class="mb-3 col-2" id="user-age">
+                <label for="ageInput" class="form-label">Edad:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="Age"
+                  id="ageInput"
+                  aria-describedby="userAge"
+                />
+              </div>
+              <div class="row">
+                <div class="pb-3 col-12">
+                  <div class="col-3" id="Question1">
+                    <label class="pb-1">Question 1:</label>
+                    <select
+                      class="form-select"
+                      name="Question1"
+                      id="question1Select"
+                    >
+                      <option value="">--Please choose an option--</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                      <option value="Not knows">Not knows</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3 mt-3" id="submit-form">
+                <button type="submit" class="btn btn-primary" value="Predict">
+                  Submit
+                </button>
+              </div>
+            </form>
+            <!-- Fin de formulario -->
           </div>
         </div>
-        <div class="mb-3 mt-3" id="submit-form">
-          <button type="submit" class="btn btn-primary" value="Predict">
-            Submit
-          </button>
+        <!-- Columna derecha -->
+        <div class="col-8">
+          <div class="p-3 border bg-light">Right</div>
         </div>
-
-        <!-- <input type="submit" value="Predict" /> -->
-      </form>
+      </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
