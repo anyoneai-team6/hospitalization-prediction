@@ -6,6 +6,8 @@ import zipfile
 import platform
 import pandas as pd
 
+__X=['paweight','pagender','pachair','pabath','pacholst', 'parafaany', 'pacancre', 'paeat', 'paswell', 'paosleep', 'padiabe', 'paagey', 'paheight', 'padoctor1y', 'parjudg', 'pawheeze', 'paarthre', 'pahrtatte', 'parxstrok', 'padrinkb', 'papaina', 'pameds', 'pafallinj', 'pasmokev', 'padadage', 'pamomage', 'paclims', 'paglasses', 'pahearaid', 'pahipe_m', 'paoalchl', 'pastroke']
+
 def change_to_root_folder():
     # Get the absolute path of the current script file
     script_path = os.path.abspath(__file__)

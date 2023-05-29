@@ -36,16 +36,10 @@ def fill_with_mean(dataframe: pd.DataFrame, columns: list):
     return dataframe[columns]
 
 
+
 def fast_fill(dataframe: pd.DataFrame):
     binary_cols, non_binary_cols = get_bin_columns(dataframe)
     dataframe[binary_cols] = fill_with_encoding(dataframe, binary_cols)
     dataframe[non_binary_cols] = fill_with_mean(dataframe, non_binary_cols)
     
     return dataframe
-
-
-def get_corr_columns(dataframe: pd.DataFrame, column: str, x: bool=False):
-    correlations = dataframe.corr()[column].abs().sort_values(ascending=x)
-    correlated_columns = correlations.index[1:25].tolist()
-    
-    return correlated_columns

@@ -72,15 +72,39 @@ def apply_power_transform(X_train, X_test):
     return X_train_transformed, X_test_transformed
 
 
-def clean_categoricals(df):
-    # This function cleans categorical columns containing 0,1 and nans, transforming them to F, T and NC
-    # and then retunrs ONLY the columns cleaned
-    selected_columns = []
-    for column in df.columns:
-        unique_values = df[column].dropna().unique()
-        if set(unique_values) <= {0, 1, np.nan}:
-            selected_columns.append(column)
+def find_column_name(df,x):
+    columnas_elegibles = []
+    for columna in df.columns:
+        if x in columna:
+            columnas_elegibles.append(columna)
     
-    cleaned_cats = df[selected_columns].replace({0: "F", 1: "T", np.nan: "NC"})
+    return columnas_elegibles
+
+
+def find_name_list(l,x):
+    columnas_elegibles = []
+    for columna in l:
+        if x in columna:
+            columnas_elegibles.append(columna)
     
-    return cleaned_cats
+    return columnas_elegibles
+
+
+def find_with_null_col(df, x):
+    columnas_con_nulos = []
+    nulos_por_columna = df.isnull().sum().sort_values(ascending=False)
+    
+    for columna, cantidad in nulos_por_columna.items():
+        if cantidad > x:
+            columnas_con_nulos.append(columna)
+    
+    return columnas_con_nulos
+
+
+def fill_column(df, x, strategy='most_frequent'):
+    imputer = SimpleImputer(strategy=strategy)
+    print(df[x].value_counts())
+    print(f'nulls: {df[x].isnull().sum()}')
+    df[[x]] = imputer.fit_transform(df[[x]])  
+    
+    return df[x]
