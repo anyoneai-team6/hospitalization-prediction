@@ -13,16 +13,16 @@
       crossorigin="anonymous"
     />
 
-    <title>Hello, world!</title>
+    <title>Final Project</title>
     <style style="height: auto">
       body {
-        background-image: url("https://www.training.com.au/wp-content/uploads/TR_Healthcare-Medical-Trends_Feature.png");
+        background-image: url("https://anyoneai.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F40dc76df-4304-433a-bcc4-071967f7191b%2FFellows_1.png?id=33f7a66c-0550-4ac2-b0b4-b4f6dbffa84c&table=block&spaceId=de6b67a5-b0e6-44c1-9c54-b0bb4f1089d4&width=2000&userId=&cache=v2");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(3px);
         /* Apply the blur effect */
-        -webkit-backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(3px);
         /* For Safari */
       }
     </style>
@@ -76,7 +76,10 @@
 
   <body>
     <div class="container-fluid px-5 mt-5">
-      <h2>Predicting Readmissions</h2>
+      <h1 style="color: white">
+        Hospitalization Prediction for Elderly Population
+      </h1>
+      <!-- Formulario -->
       <form action="/predict" method="POST">
         <div class="row gx-2">
           <!-- Columna izquierda -->
@@ -85,14 +88,14 @@
               class="p-3 rounded-3 border border-3 border-secondary"
               style="background-color: #f5f5f5"
             >
-              <!-- Formulario -->
+              <h3 class="text-center">Section</h3>
               <!-- Edad Entrevistado -->
               <label for="respAge" class="form-label" id="valueAgeResp"
-                >Respondent age:</label
+                >Age:</label
               >
               <input
                 type="range"
-                name="Respondent age"
+                name="paagey"
                 min="50"
                 max="100"
                 value="50"
@@ -102,8 +105,38 @@
               />
               <!-- Edad Entrevistado -->
 
+              <!-- Sexo del esntrevistado -->
+              <label for="" class="form-label" id="valueSex">Sex:</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="pagender"
+                    id="inlineRadio1"
+                    value="Male"
+                  />
+                  <label class="form-check-label" for="inlineRadio1"
+                    >Male</label
+                  >
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="pagender"
+                    id="inlineRadio2"
+                    value="Female"
+                  />
+                  <label class="form-check-label" for="inlineRadio2"
+                    >Female</label
+                  >
+                </div>
+              </div>
+              <!-- Sexo del esntrevistado -->
+
               <!-- Edad Madre -->
-              <label for="momAge" class="form-label" id="valueAgeMom"
+              <!-- <label for="momAge" class="form-label" id="valueAgeMom"
                 >Mother age:</label
               >
               <input
@@ -115,11 +148,11 @@
                 oninput="updateValue(this.value, 'valueAgeMom')"
                 class="form-range"
                 id="momAge"
-              />
+              /> -->
               <!-- Edad Madre -->
 
               <!-- Edad Padre -->
-              <label for="dadAge" class="form-label" id="valueAgeDad"
+              <!-- <label for="dadAge" class="form-label" id="valueAgeDad"
                 >Father age:</label
               >
               <input
@@ -131,24 +164,8 @@
                 oninput="updateValue(this.value, 'valueAgeDad')"
                 class="form-range"
                 id="dadAge"
-              />
+              /> -->
               <!-- Edad Padre -->
-
-              <!-- Peso Entrevistado -->
-              <label for="weight" class="form-label" id="valueWeight"
-                >Weight (Kg):</label
-              >
-              <input
-                type="range"
-                name="Weight"
-                min="0"
-                max="300"
-                value="0"
-                oninput="updateValue(this.value, 'valueWeight')"
-                class="form-range"
-                id="weight"
-              />
-              <!-- Peso Entrevistado -->
 
               <!-- Altura Entrevistado -->
               <label for="height" class="form-label" id="valueHeight"
@@ -156,7 +173,7 @@
               >
               <input
                 type="range"
-                name="Height"
+                name="paheight"
                 min="0"
                 max="300"
                 value="0"
@@ -166,13 +183,30 @@
               />
               <!-- Altura Entrevistado -->
 
+              <!-- Peso Entrevistado -->
+              <label for="weight" class="form-label" id="valueWeight"
+                >Weight (kg):</label
+              >
+              <input
+                type="range"
+                name="paweight"
+                min="0"
+                max="300"
+                value="0"
+                oninput="updateValue(this.value, 'valueWeight')"
+                class="form-range"
+                id="weight"
+              />
+              <!-- Peso Entrevistado -->
+
               <!-- 1era sección preguntas -->
               <div class="row">
+                <h3 class="text-center">Section</h3>
                 <div class="col-6 pb-3" id="Question1">
-                  <label class="pb-1">Question 1:</label>
+                  <label class="pb-1">Tiene presion alta?:</label>
                   <select
                     class="form-select"
-                    name="Question1"
+                    name="pahibpe"
                     id="question1Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -181,10 +215,10 @@
                   </select>
                 </div>
                 <div class="col-6 pb-3" id="Question2">
-                  <label class="pb-1">Question 2:</label>
+                  <label class="pb-1">Tiene artritis?:</label>
                   <select
                     class="form-select"
-                    name="Question2"
+                    name="paarthre"
                     id="question2Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -193,10 +227,10 @@
                   </select>
                 </div>
                 <div class="col-6 pb-3" id="Question3">
-                  <label class="pb-1">Question 3:</label>
+                  <label class="pb-1">Tiene colesterol alto?:</label>
                   <select
                     class="form-select"
-                    name="Question3"
+                    name="pacholst"
                     id="question3Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -205,10 +239,10 @@
                   </select>
                 </div>
                 <div class="col-6 pb-3" id="Question4">
-                  <label class="pb-1">Question 4:</label>
+                  <label class="pb-1">Silva al respirar?:</label>
                   <select
                     class="form-select"
-                    name="Question4"
+                    name="Wheeze"
                     id="question4Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -216,11 +250,12 @@
                     <option value="0">No</option>
                   </select>
                 </div>
+                <h3 class="text-center">Section</h3>
                 <div class="col-6 pb-3" id="Question5">
-                  <label class="pb-1">Question 5:</label>
+                  <label class="pb-1">Tiene cancer?:</label>
                   <select
                     class="form-select"
-                    name="Question5"
+                    name="pacancre"
                     id="question5Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -229,10 +264,10 @@
                   </select>
                 </div>
                 <div class="col-6 pb-3" id="Question6">
-                  <label class="pb-1">Question 6:</label>
+                  <label class="pb-1">Tiene diabetes?:</label>
                   <select
                     class="form-select"
-                    name="Question6"
+                    name="padiabe"
                     id="question6Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -241,10 +276,10 @@
                   </select>
                 </div>
                 <div class="col-6 pb-3" id="Question7">
-                  <label class="pb-1">Question 7:</label>
+                  <label class="pb-1">Tiene problemas pulmonares?:</label>
                   <select
                     class="form-select"
-                    name="Question7"
+                    name="palung_m"
                     id="question7Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -253,10 +288,10 @@
                   </select>
                 </div>
                 <div class="col-6 pb-3" id="Question8">
-                  <label class="pb-1">Question 8:</label>
+                  <label class="pb-1">Ha tenido un ataque cardiaco?:</label>
                   <select
                     class="form-select"
-                    name="Question8"
+                    name="pastroke"
                     id="question8Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -264,11 +299,12 @@
                     <option value="0">No</option>
                   </select>
                 </div>
+                <h3 class="text-center">Section</h3>
                 <div class="col-6 pb-3" id="Question9">
-                  <label class="pb-1">Question 9:</label>
+                  <label class="pb-1">Utiliza lentes?:</label>
                   <select
                     class="form-select"
-                    name="Question9"
+                    name="paglasses"
                     id="question9Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -277,35 +313,13 @@
                   </select>
                 </div>
                 <div class="col-6 pb-3" id="Question10">
-                  <label class="pb-1">Question 10:</label>
+                  <label class="pb-1"
+                    >Utiliza dispositivos de ayuda auditiva?:</label
+                  >
                   <select
                     class="form-select"
-                    name="Question10"
+                    name="pahearaid"
                     id="question10Select"
-                  >
-                    <option value="">--Please choose an option--</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
-                </div>
-                <div class="col-6 pb-3" id="Question11">
-                  <label class="pb-1">Question 11:</label>
-                  <select
-                    class="form-select"
-                    name="Question11"
-                    id="question11Select"
-                  >
-                    <option value="">--Please choose an option--</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
-                </div>
-                <div class="col-6 pb-3" id="Question12">
-                  <label class="pb-1">Question 12:</label>
-                  <select
-                    class="form-select"
-                    name="Question12"
-                    id="question12Select"
                   >
                     <option value="">--Please choose an option--</option>
                     <option value="1">Yes</option>
@@ -333,11 +347,36 @@
             >
               <!-- 2nda sección preguntas -->
               <div class="row">
-                <div class="col-4 pb-3" id="Question13">
-                  <label class="pb-1">Question 13:</label>
+                <h3 class="text-center">Section</h3>
+                <div class="col-4 pb-3" id="Question11">
+                  <label class="pb-1">Fue o es fumador/a:</label>
                   <select
                     class="form-select"
-                    name="Question13"
+                    name="pasmokev"
+                    id="question11Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question12">
+                  <label class="pb-1">Tiene problemas con el alcohol?:</label>
+                  <select
+                    class="form-select"
+                    name="padrinkb"
+                    id="question12Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question13">
+                  <label class="pb-1">Tiene problemas para dormir?:</label>
+                  <select
+                    class="form-select"
+                    name="paosleep"
                     id="question13Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -345,11 +384,12 @@
                     <option value="0">No</option>
                   </select>
                 </div>
+                <h3 class="text-center">Section</h3>
                 <div class="col-4 pb-3" id="Question14">
-                  <label class="pb-1">Question 14:</label>
+                  <label class="pb-1">Temblores en la rodillas?:</label>
                   <select
                     class="form-select"
-                    name="Question14"
+                    name="paswell"
                     id="question14Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -358,10 +398,12 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question15">
-                  <label class="pb-1">Question 15:</label>
+                  <label class="pb-1"
+                    >Tiene problemas para levantarse de la silla?:</label
+                  >
                   <select
                     class="form-select"
-                    name="Question15"
+                    name="pachair"
                     id="question15Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -370,10 +412,12 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question16">
-                  <label class="pb-1">Question 16:</label>
+                  <label class="pb-1"
+                    >Tiene problema para subir escaleras?:</label
+                  >
                   <select
                     class="form-select"
-                    name="Question16"
+                    name="paclims"
                     id="question16Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -382,10 +426,10 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question17">
-                  <label class="pb-1">Question 17:</label>
+                  <label class="pb-1">Tiene alguna limitacion motriz?:</label>
                   <select
                     class="form-select"
-                    name="Question17"
+                    name="pagrossaa"
                     id="question17Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -394,10 +438,10 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question18">
-                  <label class="pb-1">Question 18:</label>
+                  <label class="pb-1">Se ha lastimado en alguna caida?:</label>
                   <select
                     class="form-select"
-                    name="Question18"
+                    name="pafallinj"
                     id="question18Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -406,10 +450,10 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question19">
-                  <label class="pb-1">Question 19:</label>
+                  <label class="pb-1">Se ha fracturado alguna vez?:</label>
                   <select
                     class="form-select"
-                    name="Question19"
+                    name="pahipe_m"
                     id="question19Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -417,11 +461,14 @@
                     <option value="0">No</option>
                   </select>
                 </div>
+                <h3 class="text-center">Section</h3>
                 <div class="col-4 pb-3" id="Question20">
-                  <label class="pb-1">Question 20:</label>
+                  <label class="pb-1"
+                    >Tiene dificultades para contener la orina?:</label
+                  >
                   <select
                     class="form-select"
-                    name="Question20"
+                    name="papaina"
                     id="question20Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -430,10 +477,10 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question21">
-                  <label class="pb-1">Question 21:</label>
+                  <label class="pb-1">Recibe cuidados especiales?:</label>
                   <select
                     class="form-select"
-                    name="Question21"
+                    name="parafaany"
                     id="question21Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -442,10 +489,12 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question22">
-                  <label class="pb-1">Question 22:</label>
+                  <label class="pb-1"
+                    >Es capaz de tomar decisiones por si solo?:</label
+                  >
                   <select
                     class="form-select"
-                    name="Question22"
+                    name="parjudg"
                     id="question22Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -454,10 +503,10 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question23">
-                  <label class="pb-1">Question 23:</label>
+                  <label class="pb-1">Necesita ayuda para ir al bano?:</label>
                   <select
                     class="form-select"
-                    name="Question23"
+                    name="pabath"
                     id="question23Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -466,10 +515,10 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question24">
-                  <label class="pb-1">Question 24:</label>
+                  <label class="pb-1">Necesita ayuda para comer?:</label>
                   <select
                     class="form-select"
-                    name="Question24"
+                    name="paeat"
                     id="question24Select"
                   >
                     <option value="">--Please choose an option--</option>
@@ -478,35 +527,13 @@
                   </select>
                 </div>
                 <div class="col-4 pb-3" id="Question25">
-                  <label class="pb-1">Question 25:</label>
+                  <label class="pb-1"
+                    >Necesita ayuda para tomar la medicacion?:</label
+                  >
                   <select
                     class="form-select"
-                    name="Question25"
+                    name="pameds"
                     id="question25Select"
-                  >
-                    <option value="">--Please choose an option--</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
-                </div>
-                <div class="col-4 pb-3" id="Question26">
-                  <label class="pb-1">Question 26:</label>
-                  <select
-                    class="form-select"
-                    name="Question26"
-                    id="question26Select"
-                  >
-                    <option value="">--Please choose an option--</option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                  </select>
-                </div>
-                <div class="col-4 pb-3" id="Question27">
-                  <label class="pb-1">Question 27:</label>
-                  <select
-                    class="form-select"
-                    name="Question27"
-                    id="question27Select"
                   >
                     <option value="">--Please choose an option--</option>
                     <option value="1">Yes</option>
@@ -518,8 +545,12 @@
               </div>
             </div>
             <!-- Submit button -->
-            <div class="mb-3 mt-3" id="submit-form">
-              <button type="submit" class="btn btn-primary" value="Predict">
+            <div class="d-grid gap-2 col-6 mx-auto mb-3 mt-4" id="submit-form">
+              <button
+                type="submit"
+                class="btn btn-primary pt-2 pb-2"
+                value="Predict"
+              >
                 Submit
               </button>
             </div>
@@ -544,13 +575,13 @@
         var indicator = document.getElementById(id);
         var label =
           id === "valueAgeResp"
-            ? "Respondent age: "
+            ? "Age: "
             : id === "valueAgeMom"
             ? "Mother age: "
             : id === "valueAgeDad"
             ? "Father age: "
             : id === "valueWeight"
-            ? "Weight (Kg): "
+            ? "Weight (kg): "
             : id === "valueHeight"
             ? "Height (cm): "
             : "";
