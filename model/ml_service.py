@@ -12,7 +12,7 @@ db = redis.Redis(
     db=settings.REDIS_DB_ID
 )
 
-modelo = xgb.Booster()
+modelo = xgb.XGBClassifier()
 modelo.load_model('xgb-model/modelo_xgb.xgb')
 
 
