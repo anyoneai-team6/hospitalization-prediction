@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>Hello, world!</title>
+    <style style="height: auto">
+      body {
+        background-image: url("https://www.training.com.au/wp-content/uploads/TR_Healthcare-Medical-Trends_Feature.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        backdrop-filter: blur(10px);
+        /* Apply the blur effect */
+        -webkit-backdrop-filter: blur(10px);
+        /* For Safari */
+      }
+    </style>
+    <style>
+      .slider {
+        width: 300px;
+        height: 10px;
+        background: #ccc;
+        border-radius: 5px;
+        position: relative;
+        margin: 20px 0;
+      }
+
+      .slider::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        background: #007bff;
+        border-radius: 50%;
+        transform: translateX(-50%);
+      }
+
+      .slider input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 10px;
+        background: transparent;
+        outline: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .slider input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid px-5 mt-5">
+      <h2>Predicting Readmissions</h2>
+      <form action="/" method="POST">
+        <div class="row gx-2">
+          <!-- Columna izquierda -->
+          <div class="col-4">
+            <div
+              class="p-3 rounded-3 border border-3 border-secondary"
+              style="background-color: #f5f5f5"
+            >
+              <!-- Formulario -->
+              <!-- Edad Entrevistado -->
+              <label for="respAge" class="form-label" id="valueAgeResp"
+                >Respondent age:</label
+              >
+              <input
+                type="range"
+                name="Respondent age"
+                min="50"
+                max="100"
+                value="50"
+                oninput="updateValue(this.value, 'valueAgeResp')"
+                class="form-range"
+                id="respAge"
+              />
+              <!-- Edad Entrevistado -->
+
+              <!-- Edad Madre -->
+              <label for="momAge" class="form-label" id="valueAgeMom"
+                >Mother age:</label
+              >
+              <input
+                type="range"
+                name="Mother age"
+                min="50"
+                max="100"
+                value="50"
+                oninput="updateValue(this.value, 'valueAgeMom')"
+                class="form-range"
+                id="momAge"
+              />
+              <!-- Edad Madre -->
+
+              <!-- Edad Padre -->
+              <label for="dadAge" class="form-label" id="valueAgeDad"
+                >Father age:</label
+              >
+              <input
+                type="range"
+                name="Father age"
+                min="50"
+                max="100"
+                value="50"
+                oninput="updateValue(this.value, 'valueAgeDad')"
+                class="form-range"
+                id="dadAge"
+              />
+              <!-- Edad Padre -->
+
+              <!-- Peso Entrevistado -->
+              <label for="weight" class="form-label" id="valueWeight"
+                >Weight (Kg):</label
+              >
+              <input
+                type="range"
+                name="Weight"
+                min="0"
+                max="300"
+                value="0"
+                oninput="updateValue(this.value, 'valueWeight')"
+                class="form-range"
+                id="weight"
+              />
+              <!-- Peso Entrevistado -->
+
+              <!-- Altura Entrevistado -->
+              <label for="height" class="form-label" id="valueHeight"
+                >Height (cm):</label
+              >
+              <input
+                type="range"
+                name="Height"
+                min="0"
+                max="300"
+                value="0"
+                oninput="updateValue(this.value, 'valueHeight')"
+                class="form-range"
+                id="height"
+              />
+              <!-- Altura Entrevistado -->
+
+              <!-- 1era sección preguntas -->
+              <div class="row">
+                <div class="col-6 pb-3" id="Question1">
+                  <label class="pb-1">Question 1:</label>
+                  <select
+                    class="form-select"
+                    name="Question1"
+                    id="question1Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question2">
+                  <label class="pb-1">Question 2:</label>
+                  <select
+                    class="form-select"
+                    name="Question2"
+                    id="question2Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question3">
+                  <label class="pb-1">Question 3:</label>
+                  <select
+                    class="form-select"
+                    name="Question3"
+                    id="question3Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question4">
+                  <label class="pb-1">Question 4:</label>
+                  <select
+                    class="form-select"
+                    name="Question4"
+                    id="question4Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question5">
+                  <label class="pb-1">Question 5:</label>
+                  <select
+                    class="form-select"
+                    name="Question5"
+                    id="question5Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question6">
+                  <label class="pb-1">Question 6:</label>
+                  <select
+                    class="form-select"
+                    name="Question6"
+                    id="question6Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question7">
+                  <label class="pb-1">Question 7:</label>
+                  <select
+                    class="form-select"
+                    name="Question7"
+                    id="question7Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question8">
+                  <label class="pb-1">Question 8:</label>
+                  <select
+                    class="form-select"
+                    name="Question8"
+                    id="question8Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question9">
+                  <label class="pb-1">Question 9:</label>
+                  <select
+                    class="form-select"
+                    name="Question9"
+                    id="question9Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question10">
+                  <label class="pb-1">Question 10:</label>
+                  <select
+                    class="form-select"
+                    name="Question10"
+                    id="question10Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question11">
+                  <label class="pb-1">Question 11:</label>
+                  <select
+                    class="form-select"
+                    name="Question11"
+                    id="question11Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-6 pb-3" id="Question12">
+                  <label class="pb-1">Question 12:</label>
+                  <select
+                    class="form-select"
+                    name="Question12"
+                    id="question12Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+              </div>
+              <!-- 1era sección preguntas -->
+            </div>
+          </div>
+          <!-- Columna derecha -->
+          <div class="col-8">
+            <div
+              class="col-12 rounded-3 p-3 mb-3 border border-3 border-secondary"
+              style="background-color: #f5f5f5"
+            >
+              <p>Right</p>
+              <p>Right</p>
+              <p>Right</p>
+              <p>Right</p>
+            </div>
+            <div
+              class="p-3 rounded-3 border border-3 border-secondary"
+              style="background-color: #f5f5f5"
+            >
+              <!-- 2nda sección preguntas -->
+              <div class="row">
+                <div class="col-4 pb-3" id="Question13">
+                  <label class="pb-1">Question 13:</label>
+                  <select
+                    class="form-select"
+                    name="Question13"
+                    id="question13Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question14">
+                  <label class="pb-1">Question 14:</label>
+                  <select
+                    class="form-select"
+                    name="Question14"
+                    id="question14Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question15">
+                  <label class="pb-1">Question 15:</label>
+                  <select
+                    class="form-select"
+                    name="Question15"
+                    id="question15Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question16">
+                  <label class="pb-1">Question 16:</label>
+                  <select
+                    class="form-select"
+                    name="Question16"
+                    id="question16Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question17">
+                  <label class="pb-1">Question 17:</label>
+                  <select
+                    class="form-select"
+                    name="Question17"
+                    id="question17Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question18">
+                  <label class="pb-1">Question 18:</label>
+                  <select
+                    class="form-select"
+                    name="Question18"
+                    id="question18Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question19">
+                  <label class="pb-1">Question 19:</label>
+                  <select
+                    class="form-select"
+                    name="Question19"
+                    id="question19Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question20">
+                  <label class="pb-1">Question 20:</label>
+                  <select
+                    class="form-select"
+                    name="Question20"
+                    id="question20Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question21">
+                  <label class="pb-1">Question 21:</label>
+                  <select
+                    class="form-select"
+                    name="Question21"
+                    id="question21Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question22">
+                  <label class="pb-1">Question 22:</label>
+                  <select
+                    class="form-select"
+                    name="Question22"
+                    id="question22Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question23">
+                  <label class="pb-1">Question 23:</label>
+                  <select
+                    class="form-select"
+                    name="Question23"
+                    id="question23Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question24">
+                  <label class="pb-1">Question 24:</label>
+                  <select
+                    class="form-select"
+                    name="Question24"
+                    id="question24Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question25">
+                  <label class="pb-1">Question 25:</label>
+                  <select
+                    class="form-select"
+                    name="Question25"
+                    id="question25Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question26">
+                  <label class="pb-1">Question 26:</label>
+                  <select
+                    class="form-select"
+                    name="Question26"
+                    id="question26Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+                <div class="col-4 pb-3" id="Question27">
+                  <label class="pb-1">Question 27:</label>
+                  <select
+                    class="form-select"
+                    name="Question27"
+                    id="question27Select"
+                  >
+                    <option value="">--Please choose an option--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not knows">Not knows</option>
+                  </select>
+                </div>
+
+                <!-- 2nda sección preguntas -->
+              </div>
+            </div>
+            <!-- Submit button -->
+            <div class="mb-3 mt-3" id="submit-form">
+              <button type="submit" class="btn btn-primary" value="Predict">
+                Submit
+              </button>
+            </div>
+            <!-- Submit button -->
+          </div>
+          <!-- Columna derecha -->
+        </div>
+      </form>
+      <!-- Fin de formulario -->
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function updateValue(value, id) {
+        var indicator = document.getElementById(id);
+        var label =
+          id === "valueAgeResp"
+            ? "Respondent age: "
+            : id === "valueAgeMom"
+            ? "Mother age: "
+            : id === "valueAgeDad"
+            ? "Father age: "
+            : id === "valueWeight"
+            ? "Weight (Kg): "
+            : id === "valueHeight"
+            ? "Height (cm): "
+            : "";
+        indicator.innerHTML = label + value;
+      }
+    </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
