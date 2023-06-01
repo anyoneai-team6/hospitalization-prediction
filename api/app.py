@@ -34,8 +34,8 @@ def serve_form():
         return open('form.html').read()
     elif request.method == "POST":
         form_data = request.form
-        
-        pred, score =model_predict(form_data)
+        print(type(form_data))
+        # pred, score =model_predict(form_data)
         
         with open('data.json', 'w') as json_file:
             json.dump(form_data, json_file)

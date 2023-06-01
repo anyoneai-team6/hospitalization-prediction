@@ -4,7 +4,7 @@ import settings
 
 import numpy as np
 import xgboost as xgb
-
+import redis
 
 db = redis.Redis(
     host=settings.REDIS_IP ,
@@ -32,8 +32,8 @@ def predict(data):
         Model predicted class as a string and the corresponding confidence
         score as a number.
     """
-    pred = np.round(pred_probability)
     pred_probability = modelo.predict_proba(np.array([data]))[:,1]
+    pred = np.round(pred_probability)
     return pred, pred_probability
 
 
@@ -51,7 +51,7 @@ def classify_process():
         job = db.brpop(settings.REDIS_QUEUE)[1]
         
         job = json.loads(job.decode("utf-8"))
-        class_name, pred_probability = predict(job["data"])
+        class_name, pred_probability = predict(job["data_input"])
         
         pred = {
             "prediction": class_name,
