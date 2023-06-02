@@ -32,7 +32,11 @@ def predict(data):
         Model predicted class as a string and the corresponding confidence
         score as a number.
     """
-    pred_probability = modelo.predict_proba(np.array([data]))[:,1]
+    #
+    # aplicar el scaler
+    #
+    data = np.array([data])
+    pred_probability = modelo.predict_proba(data)[:,1]
     pred = np.round(pred_probability)
     return pred, pred_probability
 
