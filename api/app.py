@@ -25,7 +25,9 @@ def predict():
     # Perform prediction with ML model using form_data
 
     # Return the prediction result
-    return jsonify({'prediction': prediction_result})
+    
+    # return jsonify({'prediction': prediction_result})
+    return open('predict.html').read()
 
 @app.route('/')
 def serve_form():
