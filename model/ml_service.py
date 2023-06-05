@@ -40,6 +40,8 @@ def predict(data):
     df = df.apply(pd.to_numeric, errors='coerce')
     df = df.transpose().sort_index(axis=1)
     
+    df['paheight']=df['paheight'] / 100
+    
     np_arr = df.to_numpy()
     np_arr = transformer.transform(np_arr)
     np_arr = scaler.transform(np_arr)
