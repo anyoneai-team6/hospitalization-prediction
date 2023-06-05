@@ -37,7 +37,7 @@ def model_predict(data_input):
         "data_input": data_input
     }
     
-    res = db.lpush(settings.REDIS_QUEUE, json.dumps(job_data))
+    db.lpush(settings.REDIS_QUEUE, json.dumps(job_data))
     
     while True:
         output = db.get(job_id)
