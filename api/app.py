@@ -1,47 +1,17 @@
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template
 from middleware import model_predict
 
-from flask import (
-    Blueprint,
-    current_app,
-    flash,
-    jsonify,
-    redirect,
-    render_template,
-    request,
-    url_for,
-)
-
-app = Flask(__name__)
-
-# @app.route('/predict', methods=["GET", "POST"])
-# def predict():
-#     if request.method == "GET":
-#         return open('form.html').read()
-    
-#     if request.method == "POST":
-#         form_data = request.form
-#         # pred, score =model_predict(form_data)
-#         with open('data.json', 'w') as json_file:
-#             json.dump(form_data, json_file)
-        
-#         return redirect(request.url)
+app = Flask(__name__, template_folder='./templates')
 
 @app.route('/', methods=['GET', 'POST'])
-def serve_form():
-    if request.method == "GET":
-        return open('form.html').read()
-    elif request.method == "POST":
-        form_data = request.form
-        print(type(form_data))
-        # pred, score =model_predict(form_data)
-        
-        with open('data.json', 'w') as json_file:
-            json.dump(form_data, json_file)
-        return redirect(request.url)
+def serve_form2():
+    if request.method == 'POST':
+        data_dict = request.form.to_dict()
+        pred,prob=model_predict(data_dict)
+        return render_template('predict.html', prob=prob)
     else:
-        return "Method Not Allowed", 405
+        return render_template('form.html')
 
 if __name__ == '__main__':
     app.run()

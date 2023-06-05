@@ -1,10 +1,11 @@
 import json
 import time
 import settings
-
+import pandas as pd
 import numpy as np
 import xgboost as xgb
 import redis
+import joblib
 
 db = redis.Redis(
     host=settings.REDIS_IP ,
@@ -12,8 +13,10 @@ db = redis.Redis(
     db=settings.REDIS_DB_ID
 )
 
-modelo = xgb.XGBClassifier()
-modelo.load_model('xgb-model/modelo_xgb.xgb')
+model = xgb.XGBClassifier()
+model.load_model('jobs/model3.xgb')
+transformer = joblib.load('jobs/transformer3.pkl')
+scaler = joblib.load('jobs/scaler3.pkl')
 
 
 def predict(data):
@@ -32,13 +35,18 @@ def predict(data):
         Model predicted class as a string and the corresponding confidence
         score as a number.
     """
-    #
-    # aplicar el scaler
-    #
-    data = np.array([data])
-    pred_probability = modelo.predict_proba(data)[:,1]
+    
+    df = pd.DataFrame.from_dict(data, orient='index', columns=['Value'])
+    df = df.apply(pd.to_numeric, errors='coerce')
+    df = df.transpose().sort_index(axis=1)
+    
+    np_arr = df.to_numpy()
+    np_arr = transformer.transform(np_arr)
+    np_arr = scaler.transform(np_arr)
+    
+    pred_probability = model.predict_proba(np_arr)[:, 1][0]
     pred = np.round(pred_probability)
-    return pred, pred_probability
+    return float(pred), float(pred_probability)
 
 
 def classify_process():

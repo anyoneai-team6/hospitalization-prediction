@@ -16,8 +16,7 @@ services:
       - redis
       - model
     volumes:
-      - ./feedback:/src/feedback
-      - ./uploads:/src/static/uploads
+      - ./api:/src/api:delegated  # Monta el directorio local como volumen para la API
 
   redis:
     image: redis:6.2.6
@@ -30,4 +29,4 @@ services:
     depends_on:
       - redis
     volumes:
-      - ./uploads:/src/uploads
+      - ./model:/src/model:delegated  # Monta el directorio local como volumen para el modelo
