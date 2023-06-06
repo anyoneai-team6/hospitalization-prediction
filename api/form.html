@@ -80,7 +80,7 @@
         Hospitalization Prediction for Elderly Population
       </h1>
       <!-- Formulario -->
-      <form action="/predict" method="POST">
+      <form action="/predict" method="POST" onsubmit="return validateForm()">
         <div class="row gx-2">
           <!-- Columna izquierda -->
           <div class="col-4">
@@ -98,9 +98,9 @@
                 name="paagey"
                 min="50"
                 max="100"
-                value="50"
+                value="0"
                 oninput="updateValue(this.value, 'valueAgeResp')"
-                class="form-range"
+                class="question form-range"
                 id="respAge"
               />
               <!-- Edad Entrevistado -->
@@ -144,7 +144,7 @@
                 name="Mother age"
                 min="50"
                 max="100"
-                value="50"
+                value="0"
                 oninput="updateValue(this.value, 'valueAgeMom')"
                 class="form-range"
                 id="momAge"
@@ -160,7 +160,7 @@
                 name="Father age"
                 min="50"
                 max="100"
-                value="50"
+                value="0"
                 oninput="updateValue(this.value, 'valueAgeDad')"
                 class="form-range"
                 id="dadAge"
@@ -202,7 +202,7 @@
               <!-- 1era sección preguntas -->
               <div class="row">
                 <h3 class="text-center">Section</h3>
-                <div class="col-6 pb-3" id="Question1">
+                <div class="question col-6 pb-3" id="Question1">
                   <label class="pb-1">Tiene presion alta?:</label>
                   <select
                     class="form-select"
@@ -214,7 +214,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-6 pb-3" id="Question2">
+                <div class="question col-6 pb-3" id="Question2">
                   <label class="pb-1">Tiene artritis?:</label>
                   <select
                     class="form-select"
@@ -226,7 +226,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-6 pb-3" id="Question3">
+                <div class="question col-6 pb-3" id="Question3">
                   <label class="pb-1">Tiene colesterol alto?:</label>
                   <select
                     class="form-select"
@@ -238,7 +238,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-6 pb-3" id="Question4">
+                <div class="question col-6 pb-3" id="Question4">
                   <label class="pb-1">Silva al respirar?:</label>
                   <select
                     class="form-select"
@@ -251,7 +251,7 @@
                   </select>
                 </div>
                 <h3 class="text-center">Section</h3>
-                <div class="col-6 pb-3" id="Question5">
+                <div class="question col-6 pb-3" id="Question5">
                   <label class="pb-1">Tiene cancer?:</label>
                   <select
                     class="form-select"
@@ -263,7 +263,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-6 pb-3" id="Question6">
+                <div class="question col-6 pb-3" id="Question6">
                   <label class="pb-1">Tiene diabetes?:</label>
                   <select
                     class="form-select"
@@ -275,7 +275,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-6 pb-3" id="Question7">
+                <div class="question col-6 pb-3" id="Question7">
                   <label class="pb-1">Tiene problemas pulmonares?:</label>
                   <select
                     class="form-select"
@@ -287,7 +287,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-6 pb-3" id="Question8">
+                <div class="question col-6 pb-3" id="Question8">
                   <label class="pb-1">Ha tenido un ataque cardiaco?:</label>
                   <select
                     class="form-select"
@@ -312,7 +312,7 @@
               <!-- 2nda sección preguntas -->
               <div class="row">
                 <h3 class="text-center">Section</h3>
-                <div class="col-6 pb-3" id="Question9">
+                <div class="question col-6 pb-3" id="Question9">
                   <label class="pb-1">Utiliza lentes?:</label>
                   <select
                     class="form-select"
@@ -324,7 +324,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-6 pb-3" id="Question10">
+                <div class="question col-6 pb-3" id="Question10">
                   <label class="pb-1"
                     >Utiliza dispositivos de ayuda auditiva?:</label
                   >
@@ -339,7 +339,7 @@
                   </select>
                 </div>
                 <h3 class="text-center">Section</h3>
-                <div class="col-4 pb-3" id="Question11">
+                <div class="question col-4 pb-3" id="Question11">
                   <label class="pb-1">Fue o es fumador/a:</label>
                   <select
                     class="form-select"
@@ -351,7 +351,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question12">
+                <div class="question col-4 pb-3" id="Question12">
                   <label class="pb-1">Tiene problemas con el alcohol?:</label>
                   <select
                     class="form-select"
@@ -363,7 +363,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question13">
+                <div class="question col-4 pb-3" id="Question13">
                   <label class="pb-1">Tiene problemas para dormir?:</label>
                   <select
                     class="form-select"
@@ -376,7 +376,7 @@
                   </select>
                 </div>
                 <h3 class="text-center">Section</h3>
-                <div class="col-4 pb-3" id="Question14">
+                <div class="question col-4 pb-3" id="Question14">
                   <label class="pb-1">Temblores en la rodillas?:</label>
                   <select
                     class="form-select"
@@ -388,7 +388,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question15">
+                <div class="question col-4 pb-3" id="Question15">
                   <label class="pb-1"
                     >Tiene problemas para levantarse de la silla?:</label
                   >
@@ -402,7 +402,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question16">
+                <div class="question col-4 pb-3" id="Question16">
                   <label class="pb-1"
                     >Tiene problema para subir escaleras?:</label
                   >
@@ -416,7 +416,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question17">
+                <div class="question col-4 pb-3" id="Question17">
                   <label class="pb-1">Tiene alguna limitacion motriz?:</label>
                   <select
                     class="form-select"
@@ -428,7 +428,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question18">
+                <div class="question col-4 pb-3" id="Question18">
                   <label class="pb-1">Se ha lastimado en alguna caida?:</label>
                   <select
                     class="form-select"
@@ -440,7 +440,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question19">
+                <div class="question col-4 pb-3" id="Question19">
                   <label class="pb-1">Se ha fracturado alguna vez?:</label>
                   <select
                     class="form-select"
@@ -453,7 +453,7 @@
                   </select>
                 </div>
                 <h3 class="text-center">Section</h3>
-                <div class="col-4 pb-3" id="Question20">
+                <div class="question col-4 pb-3" id="Question20">
                   <label class="pb-1"
                     >Tiene dificultades para contener la orina?:</label
                   >
@@ -467,7 +467,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question21">
+                <div class="question col-4 pb-3" id="Question21">
                   <label class="pb-1">Recibe cuidados especiales?:</label>
                   <select
                     class="form-select"
@@ -479,7 +479,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question22">
+                <div class="question col-4 pb-3" id="Question22">
                   <label class="pb-1"
                     >Es capaz de tomar decisiones por si solo?:</label
                   >
@@ -493,7 +493,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question23">
+                <div class="question col-4 pb-3" id="Question23">
                   <label class="pb-1">Necesita ayuda para ir al bano?:</label>
                   <select
                     class="form-select"
@@ -505,7 +505,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question24">
+                <div class="question col-4 pb-3" id="Question24">
                   <label class="pb-1">Necesita ayuda para comer?:</label>
                   <select
                     class="form-select"
@@ -517,7 +517,7 @@
                     <option value="0">No</option>
                   </select>
                 </div>
-                <div class="col-4 pb-3" id="Question25">
+                <div class="question col-4 pb-3" id="Question25">
                   <label class="pb-1"
                     >Necesita ayuda para tomar la medicacion?:</label
                   >
@@ -577,6 +577,31 @@
             ? "Height (cm): "
             : "";
         indicator.innerHTML = label + value;
+      }
+    </script>
+    <script>
+      function validateForm() {
+        // Get all the question elements within the form
+        var questions = document.querySelectorAll("form .question");
+
+        // Iterate over each question element
+        for (var i = 0; i < questions.length; i++) {
+          var questionElement = questions[i];
+
+          // Check if the question has an input/select element
+          var inputElement = questionElement.querySelector("input, select");
+          if (inputElement) {
+            var value = inputElement.value;
+
+            // Check if the value is empty
+            if (value === "") {
+              alert("Please fill in all the form fields.");
+              return false;
+            }
+          }
+        }
+
+        return true; // Allow form submission if all validations pass
       }
     </script>
 
