@@ -14,7 +14,7 @@ def split_data(X, y, test_size=0.2, random_state=42):
 
 
 def apply_smote(X_train, y_train):
-    smote = SMOTE()
+    smote = SMOTE(sampling_strategy=0.2)
     X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
     return X_train_resampled, y_train_resampled
 
