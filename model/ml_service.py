@@ -14,9 +14,16 @@ db = redis.Redis(
 )
 
 model = xgb.XGBClassifier()
-model.load_model('jobs/model3.xgb')
-transformer = joblib.load('jobs/transformer3.pkl')
-scaler = joblib.load('jobs/scaler3.pkl')
+
+model.load_model('jobs/model_opa.xgb')
+transformer = joblib.load('jobs/transformer_opa.pkl')
+scaler = joblib.load('jobs/scaler_opa.pkl')
+
+# tiene q ser el mismo scaler y transformer o falla
+
+# model.load_model('df/model_0.90.xgb')
+# transformer = joblib.load('df/transformer.pkl')
+# scaler = joblib.load('df/scaler.pkl')
 
 
 def predict(data):
@@ -39,13 +46,6 @@ def predict(data):
     df = pd.DataFrame.from_dict(data, orient='index', columns=['Value'])
     df = df.apply(pd.to_numeric, errors='coerce')
     df = df.transpose().sort_index(axis=1)
-    
-    df = df[['paagey', 'paarthre', 'pabathehlp', 'pacancre', 'pachair', 'pacholst',
-       'paclims', 'padadage', 'padiabe', 'padrinkb', 'paeat', 'pafallinj',
-       'pagender', 'paglasses', 'pagrossaa', 'pahearaid', 'paheight',
-       'pahibpe', 'pahipe_m', 'palunge_m', 'pameds', 'pamomage', 'paosleep',
-       'papaina', 'parafaany', 'parjudg', 'pasmokev', 'pastroke', 'paswell',
-       'paweight', 'pawheeze']]
     
     df['paheight']=df['paheight'] / 100
     df = transformer.transform(df)
