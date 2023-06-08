@@ -2,410 +2,561 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 
-  <title>Final Project</title>
-  <style style="height: auto">
-    body {
-      background-image: url("https://anyoneai.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F40dc76df-4304-433a-bcc4-071967f7191b%2FFellows_1.png?id=33f7a66c-0550-4ac2-b0b4-b4f6dbffa84c&table=block&spaceId=de6b67a5-b0e6-44c1-9c54-b0bb4f1089d4&width=2000&userId=&cache=v2");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-      backdrop-filter: blur(3px);
-      /* Apply the blur effect */
-      -webkit-backdrop-filter: blur(3px);
-      /* For Safari */
-    }
-  </style>
-  <style>
-    .slider {
-      width: 300px;
-      height: 10px;
-      background: #ccc;
-      border-radius: 5px;
-      position: relative;
-      margin: 20px 0;
-    }
+    <title>Final Project</title>
+    <style style="height: auto">
+        body {
+            background-image: url("https://anyoneai.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F40dc76df-4304-433a-bcc4-071967f7191b%2FFellows_1.png?id=33f7a66c-0550-4ac2-b0b4-b4f6dbffa84c&table=block&spaceId=de6b67a5-b0e6-44c1-9c54-b0bb4f1089d4&width=2000&userId=&cache=v2");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            backdrop-filter: blur(3px);
+            /* Apply the blur effect */
+            -webkit-backdrop-filter: blur(3px);
+            /* For Safari */
+        }
+    </style>
+    <style>
+        .slider {
+            width: 300px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 5px;
+            position: relative;
+            margin: 20px 0;
+        }
 
-    .slider::before {
-      content: "";
-      position: absolute;
-      top: -5px;
-      left: 0;
-      width: 20px;
-      height: 20px;
-      background: #007bff;
-      border-radius: 50%;
-      transform: translateX(-50%);
-    }
+        .slider::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: #007bff;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
 
-    .slider input[type="range"] {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 10px;
-      background: transparent;
-      outline: none;
-      margin: 0;
-      padding: 0;
-      position: relative;
-      z-index: 1;
-    }
+        .slider input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: transparent;
+            outline: none;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
 
-    .slider input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      background: #007bff;
-      border-radius: 50%;
-      cursor: pointer;
-      position: relative;
-      z-index: 2;
-    }
-  </style>
+        .slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #007bff;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+        }
+
+        .custom-radio {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .custom-label {
+            font-size: 16px;
+        }
+
+        .question {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-left: 25px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-range {
+            margin-left: 13px;
+            margin-right: 13px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container-fluid px-5 mt-5">
-    <h1 style="color: white">
-      Hospitalization Prediction for Elderly Population
-    </h1>
-    <!-- Formulario -->
-    <form action="/" method="POST">
-      <div class="row gx-2">
-        <!-- Columna izquierda -->
-        <div class="col-4">
-          <div class="p-3 rounded-3 border border-3 border-secondary" style="background-color: #f5f5f5">
-            <h3 class="text-center">Section</h3>
-            <!-- Sexo del esntrevistado -->
-            <label for="" class="form-label" id="valueSex">Sex:</label>
-            <div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="pagender" id="inlineRadio1" value="2" />
-                <label class="form-check-label" for="inlineRadio1">Male</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="pagender" id="inlineRadio2" value="1" />
-                <label class="form-check-label" for="inlineRadio2">Female</label>
-              </div>
-            </div>
-            
-              <!-- Edad Entrevistado -->
-              <label for="respAge" class="form-label" id="valueAgeResp">Age:</label>
-              <input type="range" name="paagey" min="50" max="100" value="50"
-                oninput="updateValue(this.value, 'valueAgeResp')" class="form-range" id="respAge" />
-              
-              <!-- Edad Entrevistado -->
-             
-            <!-- Edad Madre -->
-            <label for="momAge" class="form-label" id="valueAgeMom"
-                >Mother age:</label
-              >
-              <input
-                type="range"
-                name="pamomage"
-                min="50"
-                max="100"
-                value="50"
-                oninput="updateValue(this.value, 'valueAgeMom')"
-                class="form-range"
-                id="momAge"
-              />
-            <!-- Edad Padre -->
-            <label for="dadAge" class="form-label" id="valueAgeDad"
-                >Father age:</label
-              >
-              <input
-                type="range"
-                name="padadage"
-                min="50"
-                max="100"
-                value="50"
-                oninput="updateValue(this.value, 'valueAgeDad')"
-                class="form-range"
-                id="dadAge"
-              />
-            
-            <!-- Altura Entrevistado -->
-            <label for="height" class="form-label" id="valueHeight">Height (cm):</label>
-            <input type="range" name="paheight" min="0" max="300" value="0"
-              oninput="updateValue(this.value, 'valueHeight')" class="form-range" id="height" />
-            
-            <!-- Peso Entrevistado -->
-            <label for="weight" class="form-label" id="valueWeight">Weight (kg):</label>
-            <input type="range" name="paweight" min="0" max="300" value="0"
-              oninput="updateValue(this.value, 'valueWeight')" class="form-range" id="weight" />
-            
-            <!-- 1era sección preguntas -->
+    <script>
+        function validateForm() {
+            var questions = document.querySelectorAll('.question');
+            for (var i = 0; i < questions.length; i++) {
+                var radios = questions[i].querySelectorAll('input[type="radio"]');
+                var checked = false;
+                for (var j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        checked = true;
+                        break;
+                    }
+                }
+                if (!checked) {
+                    alert("Por favor, complete todas las preguntas.");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+
+    <div class="container-fluid px-5 mt-5">
+        <h1 style="color: white">
+            Hospitalization Prediction for Elderly Population
+        </h1>
+
+        <form action="/" method="POST" style="background-color: #f5f5f5; padding: 30px; border-radius: 15px;">
+            <!-- Edad Entrevistado -->
             <div class="row">
-              <h3 class="text-center">Section</h3>
-              <div class="col-6 pb-3" id="Question1">
-                <label class="pb-1">Tiene presion alta?:</label>
-                <select class="form-select" name="pahibpe" id="question1Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-6 pb-3" id="Question2">
-                <label class="pb-1">Tiene artritis?:</label>
-                <select class="form-select" name="paarthre" id="question2Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-6 pb-3" id="Question3">
-                <label class="pb-1">Tiene colesterol alto?:</label>
-                <select class="form-select" name="pacholst" id="question3Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-6 pb-3" id="Question4">
-                <label class="pb-1">Silva al respirar?:</label>
-                <select class="form-select" name="pawheeze" id="question4Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <h3 class="text-center">Section</h3>
-              <div class="col-6 pb-3" id="Question5">
-                <label class="pb-1">Tiene cancer?:</label>
-                <select class="form-select" name="pacancre" id="question5Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-6 pb-3" id="Question6">
-                <label class="pb-1">Tiene diabetes?:</label>
-                <select class="form-select" name="padiabe" id="question6Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-6 pb-3" id="Question7">
-                <label class="pb-1">Tiene problemas pulmonares?:</label>
-                <select class="form-select" name="palunge_m" id="question7Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-6 pb-3" id="Question8">
-                <label class="pb-1">Ha tenido un ataque cardiaco?:</label>
-                <select class="form-select" name="pastroke" id="question8Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
+                <div class="col-6">
+                    <label for="respAge" class="form-label" id="valueAgeResp">Age:</label>
+                    <input type="range" name="paagey" min="50" max="100" value="50"
+                        oninput="updateValue(this.value, 'valueAgeResp')" class="form-range" id="respAge" />
+                    <!-- Edad Madre -->
+                    <label for="momAge" class="form-label" id="valueAgeMom">Mother age:</label>
+                    <input type="range" name="pamomage" min="50" max="100" value="50"
+                        oninput="updateValue(this.value, 'valueAgeMom')" class="form-range" id="momAge" />
+                    <!-- Edad Padre -->
+                    <label for="dadAge" class="form-label" id="valueAgeDad">Father age:</label>
+                    <input type="range" name="padadage" min="50" max="100" value="50"
+                        oninput="updateValue(this.value, 'valueAgeDad')" class="form-range" id="dadAge" />
+
+                    <!-- Altura Entrevistado -->
+                    <label for="height" class="form-label" id="valueHeight">Height (cm):</label>
+                    <input type="range" name="paheight" min="0" max="300" value="0"
+                        oninput="updateValue(this.value, 'valueHeight')" class="form-range" id="height" />
+                    <!-- Peso Entrevistado -->
+                    <label for="weight" class="form-label" id="valueWeight">Weight (kg):</label>
+                    <input type="range" name="paweight" min="0" max="300" value="0"
+                        oninput="updateValue(this.value, 'valueWeight')" class="form-range" id="weight" />
+
+                    <div class="question">
+                        <label class="form-label">Sex:</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pagender" id="inlineRadio1"
+                                value="2" />
+                            <label class="form-check-label custom-label" for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pagender" id="inlineRadio2"
+                                value="1" />
+                            <label class="form-check-label custom-label" for="inlineRadio2">Female</label>
+                        </div>
+                    </div>
+
+                    <!-- 1-4 -->
+                    <div class="question" id="Question1">
+                        <label class="form-label">Tiene presión alta?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pahibpe"
+                                id="question1Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question1Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pahibpe"
+                                id="question1Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question1Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question2">
+                        <label class="form-label">Tiene artritis?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paarthre"
+                                id="question2Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question2Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paarthre"
+                                id="question2Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question2Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question3">
+                        <label class="form-label">Tiene colesterol alto?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pacholst"
+                                id="question3Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question3Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pacholst"
+                                id="question3Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question3Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question4">
+                        <label class="form-label">Silva al respirar?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pawheeze"
+                                id="question4Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question4Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pawheeze"
+                                id="question4Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question4Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question5">
+                        <label class="form-label">Tiene cáncer?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pacancre"
+                                id="question5Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question5Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pacancre"
+                                id="question5Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question5Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question6">
+                        <label class="form-label">Tiene diabetes?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="padiabe"
+                                id="question6Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question6Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="padiabe"
+                                id="question6Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question6Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question7">
+                        <label class="form-label">Tiene problemas pulmonares?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="palunge_m"
+                                id="question7Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question7Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="palunge_m"
+                                id="question7Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question7Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question8">
+                        <label class="form-label">Ha tenido un ataque cardíaco?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pastroke"
+                                id="question8Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question8Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pastroke"
+                                id="question8Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question8Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question9">
+                        <label class="form-label">Utiliza lentes?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paglasses"
+                                id="question9Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question9Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paglasses"
+                                id="question9Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question9Radio2">No</label>
+                        </div>
+                    </div>
+
+                    <div class="question" id="Question10">
+                        <label class="form-label">Utiliza dispositivos de ayuda auditiva?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pahearaid"
+                                id="question10Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question10Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pahearaid"
+                                id="question10Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question10Radio2">No</label>
+                        </div>
+                    </div>
+
+                    <div class="question" id="Question11">
+                        <label class="form-label">Fue o es fumador/a:</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pasmokev"
+                                id="question11Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question11Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pasmokev"
+                                id="question11Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question11Radio2">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="question" id="Question12">
+                        <label class="form-label">Tiene problemas con el alcohol?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="padrinkb"
+                                id="question12Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question12Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="padrinkb"
+                                id="question12Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question12Radio2">No</label>
+                        </div>
+                    </div>
+
+                    <div class="question" id="Question13">
+                        <label class="form-label">Tiene problemas para dormir?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paosleep"
+                                id="question13Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question13Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paosleep"
+                                id="question13Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question13Radio2">No</label>
+                        </div>
+                    </div>
+
+                    <!-- aaaaaaaaaaaaa -->
+                    <div class="question" id="Question14">
+                        <label class="form-label">Temblores en la rodillas?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paswell"
+                                id="question14Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question14Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paswell"
+                                id="question14Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question14Radio2">No</label>
+                        </div>
+                    </div>
+
+                    <div class="question" id="Question15">
+                        <label class="form-label">Tiene problemas para levantarse de la silla?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pachair"
+                                id="question15Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question15Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pachair"
+                                id="question15Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question15Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question16">
+                        <label class="form-label">Tiene problema para subir escaleras?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paclims"
+                                id="question16Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question16Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paclims"
+                                id="question16Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question16Radio2">No</label>
+                        </div>
+                    </div>
+
+                    <div class="question" id="Question17">
+                        <label class="form-label">Tiene alguna limitacion motriz?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pagrossaa"
+                                id="question17Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question17Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pagrossaa"
+                                id="question17Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question17Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question18">
+                        <label class="form-label">Se ha lastimado en alguna caida?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pafallinj"
+                                id="question18Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question18Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pafallinj"
+                                id="question18Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question18Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question19">
+                        <label class="form-label">Se ha fracturado alguna vez?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pahipe_m"
+                                id="question19Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question19Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pahipe_m"
+                                id="question19Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question19Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question20">
+                        <label class="form-label">Tiene dificultades para contener la orina?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="papaina"
+                                id="question20Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question20Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="papaina"
+                                id="question20Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question20Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question21">
+                        <label class="form-label">Recibe cuidados especiales?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="parafaany"
+                                id="question21Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question21Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="parafaany"
+                                id="question21Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question21Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question22">
+                        <label class="form-label">Es capaz de tomar decisiones por si solo?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="parjudg"
+                                id="question22Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question22Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="parjudg"
+                                id="question22Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question22Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question23">
+                        <label class="form-label">Necesita ayuda para ir al bano?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pabathehlp"
+                                id="question23Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question23Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pabathehlp"
+                                id="question23Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question23Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question24">
+                        <label class="form-label">Necesita ayuda para comer?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paeat" id="question24Radio1"
+                                value="1">
+                            <label class="form-check-label custom-label" for="question24Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="paeat" id="question24Radio2"
+                                value="-1">
+                            <label class="form-check-label custom-label" for="question24Radio2">No</label>
+                        </div>
+                    </div>
+                    <div class="question" id="Question25">
+                        <label class="form-label">Necesita ayuda para tomar la medicación?</label>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pameds"
+                                id="question25Radio1" value="1">
+                            <label class="form-check-label custom-label" for="question25Radio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline" style="text-align: right;">
+                            <input class="form-check-input custom-radio" type="radio" name="pameds"
+                                id="question25Radio2" value="-1">
+                            <label class="form-check-label custom-label" for="question25Radio2">No</label>
+                        </div>
+                    </div>
+                
+                
+                <!-- submit -->
+                <div class="d-grid gap-2 col-8 mx-auto mb-3 mt-4" id="submit-form">
+                    <button type="submit" class="btn btn-primary pt-2 pb-2" value="Predict"
+                        onclick="return validateForm()">
+                        Submit
+                    </button>
+                </div>
             </div>
-            <!-- 1era sección preguntas -->
-          </div>
         </div>
-        <!-- Columna derecha -->
-        <div class="col-8">
-          <div class="p-3 rounded-3 border border-3 border-secondary" style="background-color: #f5f5f5">
-            <!-- 2nda sección preguntas -->
-            <div class="row">
-              <h3 class="text-center">Section</h3>
-              <div class="col-6 pb-3" id="Question9">
-                <label class="pb-1">Utiliza lentes?:</label>
-                <select class="form-select" name="paglasses" id="question9Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-6 pb-3" id="Question10">
-                <label class="pb-1">Utiliza dispositivos de ayuda auditiva?:</label>
-                <select class="form-select" name="pahearaid" id="question10Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <h3 class="text-center">Section</h3>
-              <div class="col-4 pb-3" id="Question11">
-                <label class="pb-1">Fue o es fumador/a:</label>
-                <select class="form-select" name="pasmokev" id="question11Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question12">
-                <label class="pb-1">Tiene problemas con el alcohol?:</label>
-                <select class="form-select" name="padrinkb" id="question12Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question13">
-                <label class="pb-1">Tiene problemas para dormir?:</label>
-                <select class="form-select" name="paosleep" id="question13Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <h3 class="text-center">Section</h3>
-              <div class="col-4 pb-3" id="Question14">
-                <label class="pb-1">Temblores en la rodillas?:</label>
-                <select class="form-select" name="paswell" id="question14Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question15">
-                <label class="pb-1">Tiene problemas para levantarse de la silla?:</label>
-                <select class="form-select" name="pachair" id="question15Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question16">
-                <label class="pb-1">Tiene problema para subir escaleras?:</label>
-                <select class="form-select" name="paclims" id="question16Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question17">
-                <label class="pb-1">Tiene alguna limitacion motriz?:</label>
-                <select class="form-select" name="pagrossaa" id="question17Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question18">
-                <label class="pb-1">Se ha lastimado en alguna caida?:</label>
-                <select class="form-select" name="pafallinj" id="question18Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question19">
-                <label class="pb-1">Se ha fracturado alguna vez?:</label>
-                <select class="form-select" name="pahipe_m" id="question19Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <h3 class="text-center">Section</h3>
-              <div class="col-4 pb-3" id="Question20">
-                <label class="pb-1">Tiene dificultades para contener la orina?:</label>
-                <select class="form-select" name="papaina" id="question20Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question21">
-                <label class="pb-1">Recibe cuidados especiales?:</label>
-                <select class="form-select" name="parafaany" id="question21Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question22">
-                <label class="pb-1">Es capaz de tomar decisiones por si solo?:</label>
-                <select class="form-select" name="parjudg" id="question22Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question23">
-                <label class="pb-1">Necesita ayuda para ir al bano?:</label>
-                <select class="form-select" name="pabathehlp" id="question23Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question24">
-                <label class="pb-1">Necesita ayuda para comer?:</label>
-                <select class="form-select" name="paeat" id="question24Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <div class="col-4 pb-3" id="Question25">
-                <label class="pb-1">Necesita ayuda para tomar la medicacion?:</label>
-                <select class="form-select" name="pameds" id="question25Select">
-                  <option value="0">--Please choose an option--</option>
-                  <option value="1">Yes</option>
-                  <option value="-1">No</option>
-                </select>
-              </div>
-              <!-- 2nda sección preguntas -->
-            </div>
-          </div>
-          <!-- Submit button -->
-          <div class="d-grid gap-2 col-6 mx-auto mb-3 mt-4" id="submit-form">
-            <button type="submit" class="btn btn-primary pt-2 pb-2" value="Predict">
-              Submit
-            </button>
-          </div>
-          <!-- Submit button -->
-        </div>
-        <!-- Columna derecha -->
-      </div>
-    </form>
-    <!-- Fin de formulario -->
-  </div>
+        </form>
+    </div>
 
-  <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        function validateForm() {
+            var questions = document.querySelectorAll('.question');
+            for (var i = 0; i < questions.length; i++) {
+                var radios = questions[i].querySelectorAll('input[type="radio"]');
+                var checked = false;
+                for (var j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        checked = true;
+                        break;
+                    }
+                }
+                if (!checked) {
+                    alert("Por favor, complete todas las preguntas.");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-  <script>
-    function updateValue(value, id) {
-      var indicator = document.getElementById(id);
-      var label =
-        id === "valueAgeResp"
-          ? "Age: "
-          : id === "valueAgeMom"
-            ? "Mother age: "
-            : id === "valueAgeDad"
-              ? "Father age: "
-              : id === "valueWeight"
-                ? "Weight (kg): "
-                : id === "valueHeight"
-                  ? "Height (cm): "
-                  : "";
-      indicator.innerHTML = label + value;
-    }
-  </script>
-
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
+    <script>
+        function updateValue(value, id) {
+            var indicator = document.getElementById(id);
+            var label =
+                id === "valueAgeResp"
+                    ? "Age: "
+                    : id === "valueAgeMom"
+                        ? "Mother age: "
+                        : id === "valueAgeDad"
+                            ? "Father age: "
+                            : id === "valueWeight"
+                                ? "Weight (kg): "
+                                : id === "valueHeight"
+                                    ? "Height (cm): "
+                                    : "";
+            indicator.innerHTML = label + value;
+        }
+    </script>
 </body>
 
 </html>
