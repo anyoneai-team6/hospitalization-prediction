@@ -15,16 +15,6 @@ db = redis.Redis(
 
 model = xgb.XGBClassifier()
 
-# tiene q ser el mismo scaler y transformer o falla
-
-# model.load_model('jobs/model_opa.xgb')
-# transformer = joblib.load('jobs/transformer_opa.pkl')
-# scaler = joblib.load('jobs/scaler_opa.pkl')
-
-# model.load_model('df/model_0.90.xgb')
-# transformer = joblib.load('df/transformer.pkl')
-# scaler = joblib.load('df/scaler.pkl')
-
 model.load_model('try-kfold/model_k.xgb')
 transformer = joblib.load('try-kfold/transformer_k.pkl')
 scaler = joblib.load('try-kfold/scaler_k.pkl')
