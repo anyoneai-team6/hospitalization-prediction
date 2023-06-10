@@ -39,7 +39,7 @@ The project plan was divided into the following milestones:
 
 In the current project we are working in a classification task, a binary one. In this case, it is suitable to use an accuracy  score. Along with these metrics we use the probability distribution of the value predicted in order to have a high level overview of the model performance. There are a couple of metrics we can focus on, namely the recall, and the precision. For this project the recall will be more appropriate because of the medical nature of the problem. Finally, we computed train and test data metrics in order to spot any over or underfitting issue.
 
-## Files structure:
+## Project structure:
 
 - In the `api` folder we can find the API configuration and form templates, is the user interface of the application.
 - In the `model` folder we can find the configuration of the model, is the backend of the application.
