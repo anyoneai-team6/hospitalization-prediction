@@ -8,7 +8,7 @@ The survey provides information on various demographic, health, and lifestyle-re
 
 To achieve this, this project will involve building predictive models using supervised learning techniques. The models will be trained on a subset of the MHAS dataset, and the performance of each model will be evaluated based on its ability to predict hospitalization events accurately.
 
-#### Requirements:
+### Requirements:
 
 The requirements for this project are the following ones:
 - To perform an exploratory analysis of the dataset to understand its structure and characteristics.
@@ -17,7 +17,7 @@ The requirements for this project are the following ones:
 - Once the model is trained, it is required to achieve an AUC (Area Under the Curve) of at least 0.9 to assess the model's quality.
 - Finally, to create an API implementing Docker, Flask and Redis.
 
-#### Scope & Main Deliverables:
+### Scope & Main Deliverables:
 1. We have a database with interviews from 2000 to 2018. In this database, more than 50,000 people were interviewed on various topics such as physical and mental state, social and economic status.
 Firstly, we decided to focus on variables related to the individual’s health. We also included fields such as habits, received care and the interviewer’s assessment of their living conditions to improve the predictive power of determining whether they will be hospitalized or not.
 
@@ -35,6 +35,6 @@ The project plan was divided into the following milestones:
 - Presentation of the results and demonstration of the model in real-time using an API.
 - Additional testing and preparation for the final presentation.
 
-#### Metrics:
+### Metrics:
 
 In the current project we are working in a classification task, a binary one. In this case, it is suitable to use an accuracy  score. Along with these metrics we use the probability distribution of the value predicted in order to have a high level overview of the model performance. There are a couple of metrics we can focus on, namely the recall, and the precision. For this project the recall will be more appropriate because of the medical nature of the problem. Finally, we computed train and test data metrics in order to spot any over or underfitting issue.
