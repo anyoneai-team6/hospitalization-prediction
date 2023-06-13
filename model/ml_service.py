@@ -51,7 +51,7 @@ def predict(data):
     
     pred_probability = model.predict_proba(np_arr)[:, 1][0]
     pred = np.round(pred_probability)
-    return float(pred), float(pred_probability)
+    return float(pred), round(float(pred_probability*100),2)
 
 
 def classify_process():
