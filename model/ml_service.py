@@ -13,12 +13,15 @@ db = redis.Redis(
     db=settings.REDIS_DB_ID
 )
 
-model = xgb.XGBClassifier()
+# model = xgb.XGBClassifier()
 
-model.load_model('try-kfold/model_k.xgb')
-transformer = joblib.load('try-kfold/transformer_k.pkl')
-scaler = joblib.load('try-kfold/scaler_k.pkl')
+# model.load_model('try-kfold/model_k.xgb')
+# transformer = joblib.load('try-kfold/transformer_k.pkl')
+# scaler = joblib.load('try-kfold/scaler_k.pkl')
 
+model = joblib.load('test2/model.pkl')
+transformer = joblib.load('test2/transformer.pkl')
+scaler = joblib.load('test2/scaler.pkl')
 
 def predict(data):
     """
@@ -42,14 +45,10 @@ def predict(data):
     df = df.transpose().sort_index(axis=1)
     
     df['paheight']=df['paheight'] / 100
+    df = scaler.transform(df)
     df = transformer.transform(df)
     
-    np_arr = df
-    # np_arr = df.to_numpy()
-    
-    np_arr = scaler.transform(np_arr)
-    
-    pred_probability = model.predict_proba(np_arr)[:, 1][0]
+    pred_probability = model.predict_proba(df)[:, 1][0]
     pred = np.round(pred_probability)
     return float(pred), round(float(pred_probability*100),2)
 
