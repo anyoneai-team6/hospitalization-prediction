@@ -44,3 +44,10 @@ In the current project we are working in a classification task, a binary one. In
 - In the `api` folder we can find the API configuration and form templates, is the user interface of the application.
 - In the `model` folder we can find the configuration of the model, is the backend of the application.
 - In the `model_training` folder we can find the development and analysis implemented for the used model, it also contains the project pipeline.
+
+# How to run the project with Docker-compose.
+
+1. Open your Docker desktop application.
+2. In a Windows command prompt navigate to the root folder of the project.
+3. Type the command: docker-compose up --build
+4. Finally, in your web browser navigate to your localhost: http://127.0.0.1/
