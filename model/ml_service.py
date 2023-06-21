@@ -13,31 +13,21 @@ db = redis.Redis(
     db=settings.REDIS_DB_ID
 )
 
-# model = xgb.XGBClassifier()
+transformer = joblib.load('test/transformer.pkl')
+scaler = joblib.load('test/scaler.pkl')
+model = joblib.load('test/model2.pkl') 
 
-# model.load_model('try-kfold/model_k.xgb')
-# transformer = joblib.load('try-kfold/transformer_k.pkl')
-# scaler = joblib.load('try-kfold/scaler_k.pkl')
-
-model = joblib.load('test2/model.pkl')
-transformer = joblib.load('test2/transformer.pkl')
-scaler = joblib.load('test2/scaler.pkl')
 
 def predict(data):
     """
-    Load image from the corresponding folder based on the image name
-    received, then, run our ML model to get predictions.
-    
-    Parameters
-    ----------
-    data : str
-        Image filename.
-    
-    Returns
-    -------
-    class_name, pred_probability : tuple(str, float)
-        Model predicted class as a string and the corresponding confidence
-        score as a number.
+    Predicts the probability and classification of a given dataset.
+
+    Parameters:
+    - data (dict): A dictionary containing input data as key-value pairs, where the keys represent the features/columns and the values represent the corresponding values.
+
+    Returns:
+    - pred (float): The rounded prediction/classification (0 or 1).
+    - pred_probability (float): The predicted probability as a percentage.
     """
     
     df = pd.DataFrame.from_dict(data, orient='index', columns=['Value'])
